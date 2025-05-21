@@ -18,7 +18,7 @@ const VideoBackground = ({ movieId, bool }) => {
         src={`https://www.youtube.com/embed/${trailerMovie?.key}?si=HorxQfzFY2_TAO1W&autoplay=1&mute=1`}
         title="Movie Trailer"
         frameBorder="0"
-        allow="autoplay; encrypted-media"
+   
         allowFullScreen
         style={{
           width: '100%',
