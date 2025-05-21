@@ -26,7 +26,7 @@ app.use(cookieParser());
 
 // CORS
 app.use(cors({
-  origin: "http://localhost:3000",
+  origin: "https://funfusion-kno5.onrender.com",
   credentials: true,
 }));
 
@@ -67,5 +67,5 @@ app.get("*", (req, res) => {
 // Connect DB & start server
 databaseConnection();
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server running on https://funfusion-kno5.onrender.com:${PORT}`);
 });

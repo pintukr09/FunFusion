@@ -12,7 +12,7 @@ function App() {
   useEffect(() => {
     const handleBeforeUnload = () => {
       navigator.sendBeacon(
-        "http://localhost:5000/auth/logout",
+        "https://funfusion-kno5.onrender.com/auth/logout",
         new Blob([], { type: "application/json" })
       );
     };

@@ -1,4 +1,4 @@
-export const API_END_POINT = "http://localhost:5000/api/user";
+export const API_END_POINT = "https://funfusion-kno5.onrender.com/api/user";
 export const options = {
   method: "GET",
   headers: {

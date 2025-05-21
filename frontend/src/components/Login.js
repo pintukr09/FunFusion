@@ -81,7 +81,7 @@ const Login = () => {
   };
 
   const handleGoogleRedirect = () => {
-    window.location.href = "http://localhost:5000/auth/google";
+    window.location.href = "https://funfusion-kno5.onrender.com/auth/google";
   };
 
   return (

@@ -7,7 +7,7 @@ const useHeartbeat = (email) => {
 
     const interval = setInterval(async () => {
       try {
-        await axios.post("http://localhost:5000/api/session/ping", {}, {
+        await axios.post("https://funfusion-kno5.onrender.com/api/session/ping", {}, {
           withCredentials: true // Send cookies with request
         });
       } catch (err) {

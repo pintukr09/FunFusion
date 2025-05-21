@@ -16,7 +16,7 @@ router.get("/google", passport.authenticate("google", {
 router.get("/google/callback", (req, res, next) => {
   passport.authenticate("google", async (err, user) => {
     if (err || !user) {
-      return res.redirect("http://localhost:3000/login?error=Google%20authentication%20failed");
+      return res.redirect("https://funfusion-kno5.onrender.com/login?error=Google%20authentication%20failed");
     }
 
     try {
@@ -26,7 +26,7 @@ router.get("/google/callback", (req, res, next) => {
       if (session && (now - new Date(session.lastPing)) < 30000) {
         // Redirect to login with error message in query parameter
         return res.redirect(
-          "http://localhost:3000/login?error=User%20already%20logged%20in%20on%20another%20device.%20Please%20log%20out%20first."
+          "https://funfusion-kno5.onrender.com/login?error=User%20already%20logged%20in%20on%20another%20device.%20Please%20log%20out%20first."
         );
       }
 
@@ -42,9 +42,9 @@ router.get("/google/callback", (req, res, next) => {
 
       // Set cookie and redirect
       res.cookie("token", token, { httpOnly: true });
-      res.redirect("http://localhost:3000/browse");
+      res.redirect("https://funfusion-kno5.onrender.com/browse");
     } catch (error) {
-      res.redirect("http://localhost:3000/login?error=An%20error%20occurred%20during%20Google%20login");
+      res.redirect("https://funfusion-kno5.onrender.com/login?error=An%20error%20occurred%20during%20Google%20login");
     }
   })(req, res, next);
 });

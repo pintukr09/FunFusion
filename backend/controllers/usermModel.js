@@ -134,7 +134,7 @@ export const ForgotPassword = async (req, res) => {
   user.resetTokenExpiry = expiry;
   await user.save();
 
-  const resetLink = `http://localhost:3000/reset_password/${token}`;
+  const resetLink = `https://funfusion-kno5.onrender.com/reset_password/${token}`;
 
   const transporter = nodemailer.createTransport({
     service: "gmail",

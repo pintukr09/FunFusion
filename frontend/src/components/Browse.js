@@ -29,7 +29,7 @@ const Browse = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/user/me", {
+        const res = await axios.get("https://funfusion-kno5.onrender.com/api/user/me", {
           withCredentials: true,
         });
         if (res.data.success) {
