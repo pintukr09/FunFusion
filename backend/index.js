@@ -37,7 +37,7 @@ app.use(passport.initialize());
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: "/auth/google/callback"
+  callbackURL: "https://funfusion-kno5.onrender.com/auth/google/callback"
 }, async (accessToken, refreshToken, profile, done) => {
   try {
     let user = await User.findOne({ googleId: profile.id });
@@ -67,5 +67,5 @@ app.get("*", (req, res) => {
 // Connect DB & start server
 databaseConnection();
 app.listen(PORT, () => {
-  console.log(`Server running on https://funfusion-kno5.onrender.com:${PORT}`);
+  console.log(`Server running on https://funfusion-kno5.onrender.com`);
 });

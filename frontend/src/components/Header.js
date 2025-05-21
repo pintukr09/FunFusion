@@ -59,7 +59,7 @@ const Header = () => {
             onClick={toggleHandler}
             className="bg-purple-700 text-white px-3 py-1 text-xs sm:text-sm border border-purple-400 rounded hover:bg-purple-800 transition"
           >
-            {toggle ? "Home" : "Search Movie"}
+            {toggle ? "Home" : "Search"}
           </button>
         </div>
       )}
