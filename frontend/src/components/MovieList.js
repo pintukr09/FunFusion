@@ -22,9 +22,8 @@ const MovieList = ({ title, movies, searchMovie = false }) => {
   return (
     <div className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-6">
       <h1
-        className={`${
-          searchMovie ? "text-black" : "text-white"
-        } text-xl sm:text-2xl md:text-3xl font-bold`}
+        className={`${searchMovie ? "text-black" : "text-white"
+          } text-xl sm:text-2xl md:text-3xl font-bold`}
       >
         {title}
       </h1>
