@@ -14,17 +14,16 @@ const VideoBackground = ({ movieId, bool }) => {
     <div style={{ width: '100%', height: '100%' }}>
       <iframe
         onClick={handleClick}
-        className={`${bool ? "w-full h-full" : "w-screen aspect-video"} border-none`}
-        src={`https://www.youtube.com/embed/${trailerMovie?.key}?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&showinfo=0&disablekb=1&loop=1&playlist=${trailerMovie?.key}`}
+        className={`${bool ? "w-[100%]" : "w-screen aspect-video"} `}
+        src={`https://www.youtube.com/embed/${trailerMovie?.key}?si=HorxQfzFY2_TAO1W&autoplay=1&mute=1`}
         title="Movie Trailer"
         frameBorder="0"
-        allow="autoplay; encrypted-media"
+   
         allowFullScreen
         style={{
           width: '100%',
           height: '100%',
         }}
-
       />
     </div>
   );
