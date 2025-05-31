@@ -166,11 +166,10 @@ const Login = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className={`mt-6 p-3 text-white rounded-full font-semibold transition duration-300 ${
-              isLoading
+            className={`mt-6 p-3 text-white rounded-full font-semibold transition duration-300 ${isLoading
                 ? "bg-gray-500 cursor-not-allowed"
                 : "bg-red-600 hover:bg-red-700 shadow-md hover:shadow-lg"
-            }`}
+              }`}
           >
             {isLoading ? "Please wait..." : isLogin ? "Login" : "Signup"}
           </button>
