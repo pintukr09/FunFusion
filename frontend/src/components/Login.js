@@ -12,13 +12,13 @@ const Login = () => {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // 👈 For toggle
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
   const isLoading = useSelector((store) => store.app.isLoading);
 
-  // Check for error query parameter on mount
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
     const error = queryParams.get("error");
@@ -122,22 +122,55 @@ const Login = () => {
             className="p-3 my-2 rounded-xl bg-gray-800 text-white border border-gray-700 focus:ring-2 focus:ring-red-500 outline-none transition duration-200"
             disabled={isLoading}
           />
-          <input
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            type="password"
-            placeholder="Password"
-            className="p-3 my-2 rounded-xl bg-gray-800 text-white border border-gray-700 focus:ring-2 focus:ring-red-500 outline-none transition duration-200"
-            disabled={isLoading}
-          />
+
+          {/* Password field with show/hide toggle */}
+          <div className="relative">
+            <input
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+              className="p-3 my-2 rounded-xl bg-gray-800 text-white border border-gray-700 focus:ring-2 focus:ring-red-500 outline-none transition duration-200 w-full pr-10"
+              disabled={isLoading}
+            />
+            <div
+              className="absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? (
+                // Eye Off SVG
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                  viewBox="0 0 24 24" strokeWidth={1.5} stroke="white"
+                  className="w-5 h-5">
+                  <path strokeLinecap="round" strokeLinejoin="round"
+                    d="M3 3l18 18M9.878 9.878a3 3 0 104.243 4.243M15 12a3 3 0 01-3 3
+                     m7.072-4.243a9.014 9.014 0 01-2.83 2.829m1.172-7.071
+                     A8.966 8.966 0 0112 5.25c-1.61 0-3.13.406-4.45 1.127
+                     m10.45 10.45L6.121 6.121" />
+                </svg>
+              ) : (
+                // Eye Open SVG
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                  viewBox="0 0 24 24" strokeWidth={1.5} stroke="white"
+                  className="w-5 h-5">
+                  <path strokeLinecap="round" strokeLinejoin="round"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0zm6.6 0a9.77 9.77 0
+                     01-2.016 3.345 9.974 9.974 0 01-14.058 0A9.77 9.77 0
+                     013.6 12a9.77 9.77 0 012.016-3.345 9.974 9.974 0
+                     0114.058 0A9.77 9.77 0 0121.6 12z" />
+                </svg>
+              )}
+            </div>
+          </div>
 
           <button
             type="submit"
             disabled={isLoading}
-            className={`mt-6 p-3 text-white rounded-full font-semibold transition duration-300 ${isLoading
+            className={`mt-6 p-3 text-white rounded-full font-semibold transition duration-300 ${
+              isLoading
                 ? "bg-gray-500 cursor-not-allowed"
                 : "bg-red-600 hover:bg-red-700 shadow-md hover:shadow-lg"
-              }`}
+            }`}
           >
             {isLoading ? "Please wait..." : isLogin ? "Login" : "Signup"}
           </button>
