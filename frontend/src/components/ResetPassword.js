@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from "react"; // Added useCallback
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API_END_POINT } from "../utils/constant";
@@ -6,6 +6,7 @@ import Header from "./Header";
 
 function ResetPassword() {
   const [newPassword, setNewPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // 👈 Added
   const [message, setMessage] = useState("");
   const [showPopup, setShowPopup] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -13,13 +14,12 @@ function ResetPassword() {
   const navigate = useNavigate();
   const closeButtonRef = useRef(null);
 
-  // Wrap closePopup in useCallback to prevent unnecessary re-renders
   const closePopup = useCallback(() => {
     setShowPopup(false);
     if (message === "Password reset successful.") {
       navigate("/");
     }
-  }, [message, navigate]); // Dependencies of closePopup
+  }, [message, navigate]);
 
   const handleReset = async (e) => {
     e.preventDefault();
@@ -49,7 +49,6 @@ function ResetPassword() {
     }
   };
 
-  // Accessibility: Focus on close button when popup opens and handle Escape key
   useEffect(() => {
     if (showPopup && closeButtonRef.current) {
       closeButtonRef.current.focus();
@@ -63,7 +62,7 @@ function ResetPassword() {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [showPopup, closePopup]); // Added closePopup to dependencies
+  }, [showPopup, closePopup]);
 
   return (
     <div>
@@ -75,20 +74,52 @@ function ResetPassword() {
           alt="banner"
         />
       </div>
+
       <form
         onSubmit={handleReset}
         className="flex flex-col w-[90%] sm:w-3/4 md:w-2/4 lg:w-1/3 xl:w-1/4 p-6 mt-20 mx-auto items-center justify-center absolute left-0 right-0 rounded-xl bg-black bg-opacity-80 backdrop-blur-md"
       >
         <h1 className="text-3xl text-white mb-5 font-bold">Reset Password</h1>
 
-        <input
-          type="password"
-          placeholder="New Password"
-          value={newPassword}
-          onChange={(e) => setNewPassword(e.target.value)}
-          className="outline-none p-3 my-2 rounded-full bg-gray-800 text-white w-full border border-gray-600 focus:ring-2 focus:ring-red-500 placeholder-gray-400 transition-all duration-200"
-          disabled={isLoading}
-        />
+        {/* Password Input with Eye Toggle */}
+        <div className="relative w-full">
+          <input
+            type={showPassword ? "text" : "password"}
+            placeholder="New Password"
+            value={newPassword}
+            onChange={(e) => setNewPassword(e.target.value)}
+            className="outline-none p-3 my-2 rounded-full bg-gray-800 text-white w-full border border-gray-600 focus:ring-2 focus:ring-red-500 placeholder-gray-400 transition-all duration-200 pr-10"
+            disabled={isLoading}
+          />
+          <div
+            className="absolute top-1/2 right-4 transform -translate-y-1/2 cursor-pointer"
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? (
+              // Eye Off Icon
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 24 24" strokeWidth={1.5} stroke="white"
+                className="w-5 h-5">
+                <path strokeLinecap="round" strokeLinejoin="round"
+                  d="M3 3l18 18M9.878 9.878a3 3 0 104.243 4.243M15 12a3 3 0 01-3 3
+                     m7.072-4.243a9.014 9.014 0 01-2.83 2.829m1.172-7.071
+                     A8.966 8.966 0 0112 5.25c-1.61 0-3.13.406-4.45 1.127
+                     m10.45 10.45L6.121 6.121" />
+              </svg>
+            ) : (
+              // Eye Icon
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 24 24" strokeWidth={1.5} stroke="white"
+                className="w-5 h-5">
+                <path strokeLinecap="round" strokeLinejoin="round"
+                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0zm6.6 0a9.77 9.77 0
+                     01-2.016 3.345 9.974 9.974 0 01-14.058 0A9.77 9.77 0
+                     013.6 12a9.77 9.77 0 012.016-3.345 9.974 9.974 0
+                     0114.058 0A9.77 9.77 0 0121.6 12z" />
+              </svg>
+            )}
+          </div>
+        </div>
 
         <button
           type="submit"
@@ -100,7 +131,6 @@ function ResetPassword() {
         </button>
       </form>
 
-      {/* Popup modal */}
       {showPopup && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-gray-800 p-6 rounded-lg shadow-lg max-w-sm w-full">
